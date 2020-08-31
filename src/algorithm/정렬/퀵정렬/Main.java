@@ -1,4 +1,4 @@
-package algorithm.퀵정렬;
+package algorithm.정렬.퀵정렬;
 
 public class Main {
     public static void main(String[] args) {

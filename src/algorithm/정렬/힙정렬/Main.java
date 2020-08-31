@@ -1,4 +1,4 @@
-package algorithm.힙정렬;
+package algorithm.정렬.힙정렬;
 
 public class Main {
     public static void main(String[] args) {

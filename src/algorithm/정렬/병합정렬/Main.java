@@ -1,4 +1,4 @@
-package algorithm.병합정렬;
+package algorithm.정렬.병합정렬;
 
 public class Main {
 

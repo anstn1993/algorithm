@@ -1,4 +1,4 @@
-package algorithm.버블정렬;
+package algorithm.정렬.버블정렬;
 
 public class Main {
     public static void main(String[] args) {
