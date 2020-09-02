@@ -4,46 +4,74 @@ import java.util.*;
 
 public class Main {
 
-    public static int[] array = {5, 7, 9, 0, 3, 1, 6, 2, 4, 8};
-    public static void quickSort(int[] array, int start, int end) {
-        if(start >= end) {//리스트의 원소가 하나인 경우 재귀 함수 종료
-            return;
+    public static int getBalancedIndex(String w) {
+        int num = 0;
+        char[] chars = w.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == '(') {
+                num++;
+            } else {
+                num--;
+            }
+
+            if (num == 0) {
+                return i;
+            }
         }
+        return -1;
+    }
 
-        int pivot = start;//pivot 인덱스
-        int left = start + 1;//리스트의 왼쪽부터 출발하는 인덱스
-        int right = end;//리스트의 오른쪽부터 출발하는 인덱스
-        int temp;
-
-        //정렬을 통한 분할
-        while(left <= right) {
-            while(left <= end && array[pivot] >= array[left]) {
-                left ++;
-            }
-            while(right >= start && array[pivot] <= array[right]) {
-                right --;
-            }
-            if(left > right) {
-                temp = array[right];
-                array[right] = array[pivot];
-                array[pivot] = temp;
+    private static boolean isRight(String s) {
+        char[] chars = s.toCharArray();
+        int count = 0;//왼쪽 괄호 개수
+        for(int i = 0; i < chars.length; i ++) {
+            if(chars[i] == '(') {
+                count ++;
             }
             else {
-                temp = array[right];
-                array[right] = array[left];
-                array[left] = temp;
+                if(count == 0) {
+                    return false;
+                }
+                count --;
             }
         }
-        //분할이 완료되면 좌, 우 리스트에 대한 퀵 정렬 다시 시작
-        quickSort(array, 0, right - 1);
-        quickSort(array, right + 1, end);
-
+        return true;
     }
-    public static void main(String[] args) {
-        quickSort(array, 0, array.length - 1);
 
-        for(int i = 0; i < array.length; i ++) {
-            System.out.print(array[i] + " ");
+    public static String makeRightBracket(String p) {
+        int sliceIndex = getBalancedIndex(p);
+        String u = p.substring(0, sliceIndex + 1);
+        String v = p.substring(sliceIndex + 1);
+        if(isRight(u)) {
+            return u + makeRightBracket(v);
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        sb.append(makeRightBracket(v));
+        sb.append(")");
+        u = u.substring(1, u.length() - 1);
+        char[] chars = u.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if(chars[i] == '(') {
+                chars[i] = ')';
+            }
+            else {
+                chars[i] = '(';
+            }
+        }
+        String middle = String.valueOf(chars);
+        sb.append(middle);
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String p = sc.next();
+        if (p.equals("")) {
+            System.out.println("");
+        }
+        String result = makeRightBracket(p);
+        System.out.println(result);
     }
 }

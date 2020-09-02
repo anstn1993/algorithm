@@ -1,8 +1,5 @@
 package algorithm.dfs.음료수얼려먹기;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
