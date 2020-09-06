@@ -1,6 +1,8 @@
 package algorithm.그리디.모험가길드;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -14,31 +16,16 @@ public class Main {
 
         //오름차순 정렬
         Arrays.sort(data);
-
-        int index = 0;
-        int result = 0;
-        int max = -1;
-        for (int i = data.length - 1; i >= 0; i--) {
-            int value = data[i];
-            if (value > i + 1) {
-                continue;
+        int result = 0;//총 그룹 수
+        int count = 0;//현재 그룹에 포함된 모험가 수
+        for (int i = 0; i < n; i++) {
+            count ++;//모험 참여자 수 증가
+            //현재 모험 참여자 수가 현재 공포도보다 크거나 같으면 그룹 만들기
+            if(count >= data[i]) {
+                result ++;//그룹 수 증가
+                count = 0;//현재 그룹의 모험가 수 초기화
             }
-            i = i - value;
-            if(i == 0) {
-                break;
-            }
-            result++;
         }
-//        while (true) {
-//            if(index < data.length) {
-//                result ++;
-//                int value = data[index];
-//                index += value;
-//            }
-//            else {
-//                break;
-//            }
-//        }
         System.out.println(result);
     }
 }
