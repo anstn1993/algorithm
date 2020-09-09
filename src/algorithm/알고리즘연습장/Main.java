@@ -4,74 +4,70 @@ import java.util.*;
 
 public class Main {
 
-    public static int getBalancedIndex(String w) {
-        int num = 0;
-        char[] chars = w.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == '(') {
-                num++;
-            } else {
-                num--;
-            }
+    public static int n, x;
+    public static int[] arr = new int[1000001];
 
-            if (num == 0) {
-                return i;
-            }
+    private static int findFirstIndex(int[] arr, int target, int start, int end) {
+        if(start > end) {
+            return -1;
         }
-        return -1;
+        int mid = (start + end) / 2;
+        if(arr[mid] == target && (mid == 0 || arr[mid - 1] < target)) {
+            return mid;
+        }
+        else if(arr[mid] >= target) {
+            return findFirstIndex(arr, target, start, mid - 1);
+        }
+        else {
+            return findFirstIndex(arr, target, mid + 1, end);
+        }
     }
 
-    private static boolean isRight(String s) {
-        char[] chars = s.toCharArray();
-        int count = 0;//왼쪽 괄호 개수
-        for(int i = 0; i < chars.length; i ++) {
-            if(chars[i] == '(') {
-                count ++;
-            }
-            else {
-                if(count == 0) {
-                    return false;
-                }
-                count --;
-            }
+    private static int findLastIndex(int[] arr, int target, int start, int end) {
+        if(start > end) {
+            return -1;
         }
-        return true;
+        int mid = (start + end) / 2;
+        if(arr[mid] == target && (mid == n - 1 || arr[mid + 1] > target)) {
+            return mid;
+        }
+        else if(arr[mid] > target) {
+            return findLastIndex(arr, target, start, mid - 1);
+        }
+        else {
+            return findLastIndex(arr, target, mid + 1, end);
+        }
     }
 
-    public static String makeRightBracket(String p) {
-        int sliceIndex = getBalancedIndex(p);
-        String u = p.substring(0, sliceIndex + 1);
-        String v = p.substring(sliceIndex + 1);
-        if(isRight(u)) {
-            return u + makeRightBracket(v);
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("(");
-        sb.append(makeRightBracket(v));
-        sb.append(")");
-        u = u.substring(1, u.length() - 1);
-        char[] chars = u.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if(chars[i] == '(') {
-                chars[i] = ')';
-            }
-            else {
-                chars[i] = '(';
-            }
-        }
-        String middle = String.valueOf(chars);
-        sb.append(middle);
+    private static int countByValue(int[] arr, int target) {
 
-        return sb.toString();
+        int firstIndex = findFirstIndex(arr, target, 0, n - 1);
+        int lastIndex = findLastIndex(arr, target, 0, n - 1);
+
+        if(firstIndex == -1) {
+            return 0;
+        }
+
+        return lastIndex - firstIndex + 1;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String p = sc.next();
-        if (p.equals("")) {
-            System.out.println("");
+
+        n = sc.nextInt();
+        x = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
         }
-        String result = makeRightBracket(p);
-        System.out.println(result);
+
+        int count = countByValue(arr, x);
+
+        if(count == 0) {
+            System.out.println(-1);
+        }
+        else {
+            System.out.println(count);
+        }
     }
 }
