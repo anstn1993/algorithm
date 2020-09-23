@@ -31,5 +31,4 @@ public class Main {
         int result = binarySearch(arr, 0, n - 1);
         System.out.println(result);
     }
-
 }
