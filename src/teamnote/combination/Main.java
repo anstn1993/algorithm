@@ -6,7 +6,7 @@ import java.util.List;
 class Combination {
     private int n;//전체 원소 개수
     private int r;//조합할 원소 개수
-    private int[] now; //현재 조합된 원소를 담을 배열
+    private int[] now; //현재 조합의 인덱스를 담는 배열
     private ArrayList<ArrayList<Integer>> result; // 모든 조합 결과를 담을 리스트
 
     public ArrayList<ArrayList<Integer>> getResult() {
@@ -20,6 +20,12 @@ class Combination {
         this.result = new ArrayList<ArrayList<Integer>>();
     }
 
+    /*
+    * param 0: 전체 원소
+    * param 1: 선택된 수가 r개인지 체크하는 변수
+    * parma 2: 선택된 수의 인덱스를 저장하는 now배열의 인덱스(r이 2라면 0, 1이 index값으로 반복되고 저 인덱스에 target값을 계속 저장)
+    * param 3: 전체 원소 중에서 현재 조합에 포함해야 하는 원소의 인덱스(now 배열에 저장되는 수)
+    * */
     public void combination(ArrayList<Integer> arr, int depth, int index, int target) {
         if (depth == r) {
             ArrayList<Integer> temp = new ArrayList<>();

@@ -1,20 +1,25 @@
-package algorithm.알고리즘연습장;
+package algorithm.구현.LRU캐시;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class LRUCache {
+/*
+* LRU Cache problem
+* 출처: leet code
+* */
+public class LRUCache {
 
-    private int capacity;
+    private int capacity;//캐시 size
     CacheItem head;
     CacheItem tail;
-    Map<Integer, CacheItem> map;
+    Map<Integer, CacheItem> map;//각 노드 포인터를 저장해서 탐색시 O(1) 시간 복잡도로 접근하기 위한 map
 
+    //캐시에 저장될 노드 클래스
     class CacheItem {
         private int key;
         private int value;
-        private CacheItem prev;
-        private CacheItem next;
+        private CacheItem prev;//이전 노드 레퍼런스
+        private CacheItem next;//다음 노드 레퍼런스
 
         public CacheItem(int key, int value) {
             this.key = key;
@@ -106,23 +111,5 @@ class LRUCache {
             }
             System.out.println();
         }
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        LRUCache cache = new LRUCache(3);
-        cache.put(1, 1);
-        cache.show();
-        cache.put(2, 2);
-        cache.show();
-        cache.put(3, 3);
-        cache.show();
-        cache.get(1);
-        cache.put(4, 4);
-        cache.show();
-        cache.get(2);
-        cache.put(5, 5);
-        cache.show();
     }
 }
