@@ -1,4 +1,4 @@
-package algorithm.backtracking.validsudoku;
+package algorithm.백트래킹.validsudoku;
 
 import java.util.Arrays;
 

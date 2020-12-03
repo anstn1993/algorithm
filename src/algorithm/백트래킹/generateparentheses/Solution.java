@@ -1,4 +1,4 @@
-package algorithm.backtracking.generateparentheses;
+package algorithm.백트래킹.generateparentheses;
 
 import java.util.ArrayList;
 import java.util.List;

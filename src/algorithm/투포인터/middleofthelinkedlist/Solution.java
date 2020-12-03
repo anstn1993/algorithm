@@ -1,4 +1,4 @@
-package algorithm.구현.middleofthelinkedlist;
+package algorithm.투포인터.middleofthelinkedlist;
 
 /*
  * 출처: leetcode
