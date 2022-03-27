@@ -3,6 +3,7 @@ class Solution {
         return search(nums, target, 0, nums.length - 1);
     }
     
+    // 이진 탐색 트리
     private int search(int[] nums, int target, int startIndex, int endIndex) {
         if(startIndex > endIndex) {
             return startIndex;
