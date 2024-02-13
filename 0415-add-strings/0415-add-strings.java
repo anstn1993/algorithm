@@ -29,8 +29,6 @@ class Solution {
             num1Sub = 0;
             num2Sub = 0;
         }
-        //99
-        // 9
         
         Collections.reverse(sumArr);
         return sumArr.stream().map(String::valueOf).collect(Collectors.joining());
